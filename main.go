@@ -39,6 +39,7 @@ func main() {
 	err = dg.Open()
 	if err != nil {
 		fmt.Println("error opening connection,", err)
+		return
 	}
 
 	//Wait for termination
