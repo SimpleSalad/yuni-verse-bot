@@ -30,7 +30,7 @@ func main() {
 		return
 	}
 
-	dg.AddHandler(messageCreate)
+	dg.AddHandler(messageTest)
 
 	//Declare intents
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
@@ -44,6 +44,9 @@ func main() {
 
 	//Wait for termination
 	fmt.Println("Yuni Bot connected to Discord.")
+
+	dg.UpdateGameStatus(0, "Dance Dance Revolution")
+
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sigchan
@@ -52,14 +55,32 @@ func main() {
 }
 
 // Check every message if it contains trigger words and respond
-func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+func messageTest(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	//Bot ignores messages created by itself
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
+	if m.Content == "1" {
+		s.ChannelMessageSend(m.ChannelID, "1")
+		s.AddHandlerOnce(messageChainTest1)
+	}
+
 	if m.Content == "test" {
 		s.ChannelMessageSend(m.ChannelID, "reply")
+	}
+}
+
+func messageChainTest1(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if m.Content == "2" {
+		s.ChannelMessageSend(m.ChannelID, "2")
+		s.AddHandlerOnce(messageChainTest2)
+	}
+}
+
+func messageChainTest2(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if m.Content == "3" {
+		s.ChannelMessageSend(m.ChannelID, "3")
 	}
 }
