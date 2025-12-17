@@ -12,18 +12,17 @@ import (
 
 // Variables for parameters
 var (
-	BotToken string
+	BotToken = flag.String("t", "", "Bot Token")
+	GuildID  = flag.String("g", "", "Test Guild ID")
 )
 
-// Define the bot token
 func init() {
-	flag.StringVar(&BotToken, "t", "", "Bot Token")
 	flag.Parse()
 }
 
 func main() {
 	//Create bot session
-	dg, err := discordgo.New("Bot " + BotToken)
+	dg, err := discordgo.New("Bot " + *BotToken)
 
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
@@ -31,6 +30,9 @@ func main() {
 	}
 
 	dg.AddHandler(messageTest)
+	dg.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+		fmt.Printf("Online as: %v#%v\n", s.State.User.Username, s.State.User.Discriminator)
+	})
 
 	//Declare intents
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
@@ -43,9 +45,8 @@ func main() {
 	}
 
 	//Wait for termination
-	fmt.Println("Yuni Bot connected to Discord.")
 
-	dg.UpdateGameStatus(0, "Dance Dance Revolution")
+	dg.UpdateGameStatus(0, "Dance Dance Revolution World")
 
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
