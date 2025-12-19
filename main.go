@@ -46,7 +46,7 @@ func main() {
 
 	dg.UpdateGameStatus(0, "Dance Dance Revolution World")
 
-	lamps.addLamps(dg, GuildID)
+	lamps.AddLamps(dg, *GuildID)
 
 	//Wait for termination
 	sigchan := make(chan os.Signal, 1)

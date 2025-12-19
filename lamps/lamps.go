@@ -6,7 +6,7 @@ import (
 
 //add commands
 
-func addLamps(s *discordgo.Session, g string) {
-	var cmd = *testlamp.cmd
+func AddLamps(s *discordgo.Session, g string) {
+	var cmd = *testlamp.Command
 	s.ApplicationCommandCreate(s.State.User.ID, g, cmd)
 }
