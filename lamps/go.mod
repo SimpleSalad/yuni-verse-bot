@@ -3,7 +3,7 @@ module github.com/SimpleSalad/yuni-verse-bot/lamps
 go 1.25.5
 
 require (
-	github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp v0.0.0-20251219051528-bbf5111ee347
+	github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp v0.0.0-20251219054506-b268373fd273
 	github.com/bwmarrin/discordgo v0.29.0
 )
 

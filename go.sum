@@ -1,5 +1,5 @@
-github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp v0.0.0-20251219051528-bbf5111ee347 h1:jdcfYZ3LvzUUMbdDXQGY8oqmbiaSMx39eQasTpiDuj8=
-github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp v0.0.0-20251219051528-bbf5111ee347/go.mod h1:3eYSGqJiv32Vfq9wQEE17OAB8LH51Qou+D50HMlwUng=
+github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp v0.0.0-20251219054506-b268373fd273 h1:CFAfmjTlIubf4dYq7BRqULB0pWZ4XQpp60ss0wWknVM=
+github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp v0.0.0-20251219054506-b268373fd273/go.mod h1:BUJdmP55D2fJcXhZ+pYRfEzr67Idg2u9Ozf42Q2SzMw=
 github.com/bwmarrin/discordgo v0.29.0 h1:FmWeXFaKUwrcL3Cx65c20bTRW+vOb6k8AnaP+EgjDno=
 github.com/bwmarrin/discordgo v0.29.0/go.mod h1:NJZpH+1AfhIcyQsPeuBKsUtYrRnjkyu0kIVMCHkZtRY=
 github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
