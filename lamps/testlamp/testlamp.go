@@ -37,8 +37,8 @@ func commandTest(s *discordgo.Session, i *discordgo.InteractionCreate) {
 }
 
 func CreateCommand(s *discordgo.Session, g string) {
-	ccmd, err := s.ApplicationCommandCreate(s.State.User.ID, g, &cmd)
-	log.Printf("Creating command '%v'...\n", &ccmd.Name)
+	_, err := s.ApplicationCommandCreate(s.State.User.ID, g, &cmd)
+	log.Printf("Creating command '%v'...\n", &cmd.Name)
 	if err != nil {
 		log.Panicf("Error creating command '%v': %v\n", &cmd.Name, err)
 	}

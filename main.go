@@ -36,7 +36,7 @@ func main() {
 	})
 
 	//Declare intents
-	dg.Identify.Intents = discordgo.IntentsGuildMessages
+	dg.Identify.Intents = discordgo.IntentsAll
 
 	//Open session
 	err = dg.Open()
