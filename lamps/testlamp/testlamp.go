@@ -12,7 +12,7 @@ var (
 		Description: "sends a test reply",
 		Options: []*discordgo.ApplicationCommandOption{
 			{
-				Type:        3,
+				Type:        discordgo.ApplicationCommandOptionInteger,
 				Name:        "type",
 				Description: "The type of response to request from the bot. Default: plain.",
 				Required:    false,
@@ -33,12 +33,17 @@ var (
 
 // send a message in chat
 func commandTest(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	s.ChannelMessageSend(i.ChannelID, "Test")
+	s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+		Type: discordgo.InteractionResponseChannelMessageWithSource,
+		Data: &discordgo.InteractionResponseData{
+			Content: "Reply",
+		},
+	})
 }
 
 func CreateCommand(s *discordgo.Session, g string) {
 	_, err := s.ApplicationCommandCreate(s.State.User.ID, g, &cmd)
-	log.Printf("Creating command '%v'...\n", &cmd.Name)
+	log.Printf("Creating command '%v'...\n", cmd.Name)
 	if err != nil {
 		log.Panicf("Error creating command '%v': %v\n", &cmd.Name, err)
 	}
