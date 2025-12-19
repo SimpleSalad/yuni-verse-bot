@@ -8,7 +8,10 @@ require (
 )
 
 require (
+	github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp v0.0.0-20251219051528-bbf5111ee347 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	golang.org/x/crypto v0.46.0 // indirect
 	golang.org/x/sys v0.39.0 // indirect
 )
+
+replace github.com/SimpleSalad/yuni-verse-bot/lamps => ./lamps

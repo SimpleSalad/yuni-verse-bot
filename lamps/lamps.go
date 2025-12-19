@@ -8,6 +8,5 @@ import (
 //add commands
 
 func AddLamps(s *discordgo.Session, g string) {
-	var cmd = *testlamp.Command
-	s.ApplicationCommandCreate(s.State.User.ID, g, cmd)
+	testlamp.CreateCommand(s, g)
 }

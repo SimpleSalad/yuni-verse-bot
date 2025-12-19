@@ -2,13 +2,8 @@ package testlamp
 
 import "github.com/bwmarrin/discordgo"
 
-//send a message in chat
-func commandTest(s *discordgo.Session, i *discordgo.Interaction) {
-	s.ChannelMessageSend(i.ChannelID, "Test")
-}
-
 var (
-	Command = discordgo.ApplicationCommand{
+	cmd = discordgo.ApplicationCommand{
 		Name:        "test",
 		Description: "sends a test reply",
 		Options: []*discordgo.ApplicationCommandOption{
@@ -31,3 +26,13 @@ var (
 		},
 	}
 )
+
+//send a message in chat
+func commandTest(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	s.ChannelMessageSend(i.ChannelID, "Test")
+}
+
+func CreateCommand(s *discordgo.Session, g string) {
+	s.ApplicationCommandCreate(s.State.User.ID, g, &cmd)
+	s.AddHandler(commandTest)
+}
