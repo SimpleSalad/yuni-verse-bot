@@ -15,7 +15,7 @@ var (
 				Type:        discordgo.ApplicationCommandOptionInteger,
 				Name:        "type",
 				Description: "The type of response to request from the bot. Default: plain.",
-				Required:    false,
+				Required:    true,
 				Choices: []*discordgo.ApplicationCommandOptionChoice{
 					{
 						Name:  "Plain",
@@ -33,12 +33,25 @@ var (
 
 // send a message in chat
 func commandTest(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-		Type: discordgo.InteractionResponseChannelMessageWithSource,
-		Data: &discordgo.InteractionResponseData{
-			Content: "Reply",
-		},
-	})
+	c := i.ApplicationCommandData().Options
+	if c[0].Value == 1 {
+		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			Type: discordgo.InteractionResponseChannelMessageWithSource,
+			Data: &discordgo.InteractionResponseData{
+				AllowedMentions: &discordgo.MessageAllowedMentions{
+					RepliedUser: true,
+				},
+				Content: "Ping Reply!",
+			},
+		})
+	} else {
+		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			Type: discordgo.InteractionResponseChannelMessageWithSource,
+			Data: &discordgo.InteractionResponseData{
+				Content: "Plain Reply",
+			},
+		})
+	}
 }
 
 func CreateCommand(s *discordgo.Session, g string) {
