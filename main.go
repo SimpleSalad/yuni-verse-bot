@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/SimpleSalad/yuni-verse-bot/lamps"
 	"github.com/bwmarrin/discordgo"
 )
 

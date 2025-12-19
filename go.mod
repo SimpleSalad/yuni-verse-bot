@@ -1,8 +1,11 @@
 module github.com/SimpleSalad/yuni-verse-bot
 
-go 1.25
+go 1.25.5
 
-require github.com/bwmarrin/discordgo v0.29.0
+require (
+	github.com/SimpleSalad/yuni-verse-bot/lamps v0.0.0-20251219051528-bbf5111ee347
+	github.com/bwmarrin/discordgo v0.29.0
+)
 
 require (
 	github.com/gorilla/websocket v1.5.3 // indirect

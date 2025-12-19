@@ -1,6 +1,7 @@
 package lamps
 
 import (
+	"github.com/SimpleSalad/yuni-verse-bot/lamps/testlamp"
 	"github.com/bwmarrin/discordgo"
 )
 
