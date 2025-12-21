@@ -34,14 +34,15 @@ var (
 // send a message in chat
 func commandTest(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	c := i.ApplicationCommandData().Options
-	if c[0].Value == 1 {
+	log.Println(c[0].IntValue())
+	if c[0].IntValue() == 1 {
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,
 			Data: &discordgo.InteractionResponseData{
 				AllowedMentions: &discordgo.MessageAllowedMentions{
 					RepliedUser: true,
 				},
-				Content: "Ping Reply!",
+				Content: "<@" + i.Member.User.ID + "> Ping Reply!",
 			},
 		})
 	} else {
