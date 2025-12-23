@@ -15,7 +15,7 @@ var (
 				Type:        discordgo.ApplicationCommandOptionInteger,
 				Name:        "type",
 				Description: "The type of response to request from the bot. Default: plain.",
-				Required:    true,
+				Required:    false,
 				Choices: []*discordgo.ApplicationCommandOptionChoice{
 					{
 						Name:  "Plain",
@@ -34,24 +34,35 @@ var (
 // send a message in chat
 func commandTest(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	c := i.ApplicationCommandData().Options
-	log.Println(c[0].IntValue())
-	if c[0].IntValue() == 1 {
-		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-			Type: discordgo.InteractionResponseChannelMessageWithSource,
-			Data: &discordgo.InteractionResponseData{
-				AllowedMentions: &discordgo.MessageAllowedMentions{
-					RepliedUser: true,
-				},
-				Content: "<@" + i.Member.User.ID + "> Ping Reply!",
+
+	//responses
+	rping := discordgo.InteractionResponse{
+		Type: discordgo.InteractionResponseChannelMessageWithSource,
+		Data: &discordgo.InteractionResponseData{
+			AllowedMentions: &discordgo.MessageAllowedMentions{
+				RepliedUser: true,
 			},
-		})
+			Content: "<@" + i.Member.User.ID + "> Ping Reply!",
+		},
+	}
+	rplain := discordgo.InteractionResponse{
+		Type: discordgo.InteractionResponseChannelMessageWithSource,
+		Data: &discordgo.InteractionResponseData{
+			Content: "Plain Reply",
+		},
+	}
+
+	//respond with desired response, if none specified default to plain
+	if c != nil {
+		log.Printf("Test Lamp: %v\n", c[0].IntValue())
+		if c[0].IntValue() == 1 {
+			s.InteractionRespond(i.Interaction, &rping)
+		} else {
+			s.InteractionRespond(i.Interaction, &rplain)
+		}
 	} else {
-		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-			Type: discordgo.InteractionResponseChannelMessageWithSource,
-			Data: &discordgo.InteractionResponseData{
-				Content: "Plain Reply",
-			},
-		})
+		log.Println("Test Lamp: No option selected.")
+		s.InteractionRespond(i.Interaction, &rplain)
 	}
 }
 
